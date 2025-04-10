@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    
+  }
+  
+  header {
+    display: flex;
+    gap: 1rem;
+    padding-left: 3rem;
+    height: 5rem;
+    background-color: #7e80ff;
+    color: white;
+    align-items: center;
+  }
+  
+  #logo {
+    padding: 1rem;
+    background-color: white;
+    border-radius: 50%;
+  }
+  
+  main {
+    display: flex;
+    align-items: center;
+    margin: 5rem;
+  }
+  
+  #computerImg {
+    background-color: gray;
+    margin: 2rem;
+    height: 20rem;
+    width: 35%;
+    
+  }
+  
+  #sloganLoginContainer {
+    text-align: center;
+    width: 65%;
+  }
+  
+  #slogan {
+    margin-bottom: 2rem;
+  }
+  
+  #loginRegisterContainer {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+  }
+  
+  .loginButton {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    width: 15rem;
+  }
+  
+  #loginButton {
+    background: linear-gradient(80deg,#78E4FF, #7184FF, #FC45FF);
+  }
+  
+  #registerButton {
+    background: linear-gradient(80deg,#FC45FF, #A071FF, #8310FF);
+  }
