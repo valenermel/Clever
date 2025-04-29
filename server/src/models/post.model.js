@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const taskSchema = new mongoose.Schema(
+const postSchema = new mongoose.Schema(
     {
         title:{
             type: String,
@@ -10,10 +10,17 @@ const taskSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        date:{
-            type: Date,
-            default: Date.now,
+
+        votos_negativos:{
+            type: Number,
+            default: 0
         },
+
+        votos_positivos:{
+            type: Number,
+            default: 0
+        },
+
         user:{ //esto es para guardar de que usuario es esa tarea
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
@@ -25,4 +32,4 @@ const taskSchema = new mongoose.Schema(
     }
 )
 
-export default mongoose.model('Task',taskSchema)
+export default mongoose.model('Post',postSchema)
