@@ -8,7 +8,7 @@ export const register = async (req, res, next) => {
     try {
 
         const emailAlreadyExists = await User.findOne({email})
-        if(emailAlreadyExists) throw appError(400, "Email already exists")
+        if(emailAlreadyExists) throw new appError("Email already exists", 400)
 
         const passwordHashed = await bcrypt.hash(password, 10)
         const newUser = new User({
@@ -36,10 +36,10 @@ export const login = async (req, res, next) => {
     const {email, password} = req.body
     try {
         const userFound = await User.findOne({email})
-        if (!userFound) throw appError(400, "User not found")
+        if (!userFound) throw new appError("User not found", 404)
 
         const isMatch = await bcrypt.compare(password, userFound.password)
-        if (!isMatch) throw appError(400, "Incorrect password")
+        if (!isMatch) throw new appError("Incorrect password", 400)
 
         const token = await createAccessToken({ id: userFound._id })
         res.cookie('token', token)
@@ -68,7 +68,7 @@ export const logout = (req, res, next) => {
 export const profile = async (req, res, next) => {
     try {
         const userFound = await User.findById(req.user.id)
-        if (!userFound) throw appError(400, "User not found")
+        if (!userFound) throw new appError("User not found", 404)
 
         const userObject = userFound.toObject()
         return res.json({

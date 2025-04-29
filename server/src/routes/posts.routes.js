@@ -6,14 +6,14 @@ import { validateSchema } from '../middlewares/validator.middleware.js'
 
 const router = Router()
 
-router.get('/post', authRequired, getPosts)
+router.get('/posts', authRequired, getPosts)
 
-router.get('/post/:id', authRequired, getPost)
+router.get('/posts/:id', authRequired, getPost)
 
-router.post('/post', validateSchema(createPostSchema) ,authRequired, createPost)
+router.post('/posts', validateSchema(createPostSchema) ,authRequired, createPost)
 
-router.delete('/post/:id', authRequired, deletePost)
+router.delete('/posts/:id', authRequired, deletePost)
 
-router.put('/post/:id', authRequired, updatePost)
+router.put('/posts/:id', authRequired, updatePost)
 
 export default router
