@@ -4,11 +4,22 @@ import authRoutes from './routes/auth.routes.js'
 import postRoutes from './routes/posts.routes.js'
 import cookieParser from 'cookie-parser'
 import errorHandler from './middlewares/errorHandler.js'
+import cors from 'cors'
+import helmet from 'helmet'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
+
+import connectdb from './config/db.js'
+connectdb()
+
+app.use(cors())
+app.use(helmet())
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(cookieParser())
+
 app.use('/api',authRoutes)
 app.use('/api',postRoutes)
 
