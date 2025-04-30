@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-export const connectdb = async () => {
+const connectdb = async () => {
     try{
         await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/cleverdb');
         console.log("Connected to database");
@@ -11,3 +11,4 @@ export const connectdb = async () => {
     }
     
 }
+export default connectdb
