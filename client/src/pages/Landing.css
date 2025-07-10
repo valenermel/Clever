@@ -3,7 +3,7 @@
     
   }
   
-  header {
+  #header {
     display: flex;
     gap: 1rem;
     padding-left: 3rem;

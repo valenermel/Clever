@@ -14,7 +14,10 @@ const app = express()
 import connectdb from './config/db.js'
 connectdb()
 
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+  }));
 app.use(helmet())
 app.use(morgan('dev'))
 app.use(express.json())

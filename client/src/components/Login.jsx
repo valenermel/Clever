@@ -1,34 +1,30 @@
 import { useState } from "react"
 import "../pages/Landing.css"
-import { registerRequest, setToken } from "../api/auth"
+import { loginRequest, isAuthenticated } from "../api/auth"
 
-function Register({ onClose, onRegisterSuccess }) {
-  const [username, setUsername] = useState("")
+function Login({ onClose, onLoginSuccess }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setError("")
     setLoading(true)
+    setError("")
     try {
-      const res = await registerRequest({ username, email, password })
-      if (res.data) {
-        setSuccess(true)
-        setLoading(false)
-        // Si el backend devuelve token, lo guardamos
-        if (res.data.token) setToken(res.data.token)
-        setTimeout(() => {
-          if (onRegisterSuccess) onRegisterSuccess()
-          onClose()
-        }, 1200)
+      await loginRequest({ email, password })
+      setLoading(false)
+      // Si la cookie de token está presente, login exitoso
+      if (isAuthenticated()) {
+        if (onLoginSuccess) onLoginSuccess()
+        onClose()
+      } else {
+        setError("No se pudo iniciar sesión. Intenta de nuevo.")
       }
     } catch (err) {
       setError(
-        err.response?.data?.message || "Error al registrarse. Verifica los datos."
+        err.response?.data?.message || "Error al iniciar sesión. Verifica tus datos."
       )
       setLoading(false)
     }
@@ -38,27 +34,12 @@ function Register({ onClose, onRegisterSuccess }) {
     <div className="modal-overlay">
       <div className="modal-container">
         <div className="modal-header">
-          <h2>Crear cuenta</h2>
+          <h2>Iniciar sesión</h2>
           <button className="close-button" onClick={onClose}>
             ×
           </button>
         </div>
         <form className="modal-body" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Nombre completo</label>
-            <div className="input-container">
-              <span className="input-icon">👤</span>
-              <input
-                type="text"
-                placeholder="Ingresa tu nombre y apellido"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                required
-              />
-            </div>
-            <div className="example-text">Ej. Juan Pérez</div>
-          </div>
-
           <div className="form-group">
             <label>Email</label>
             <div className="input-container">
@@ -80,7 +61,7 @@ function Register({ onClose, onRegisterSuccess }) {
               <span className="input-icon">🔒</span>
               <input
                 type="password"
-                placeholder="Crea una contraseña"
+                placeholder="Ingresa tu contraseña"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 required
@@ -89,23 +70,15 @@ function Register({ onClose, onRegisterSuccess }) {
             <div className="example-text">Tu contraseña debe tener al menos 8 caracteres</div>
           </div>
 
-          {/* El campo de fecha de nacimiento es solo visual, no se envía al backend */}
- 
-
           {error && <div className="example-text" style={{ color: 'red' }}>{error}</div>}
-          {success && <div className="example-text" style={{ color: 'green' }}>¡Registro exitoso!</div>}
 
           <button className="create-button" type="submit" disabled={loading}>
-            {loading ? "Creando..." : "Crear"}
+            {loading ? "Ingresando..." : "Ingresar"}
           </button>
-
-          <div className="login-link">
-            ¿Ya tienes una cuenta? <a href="#" onClick={onClose}>Iniciar Sesión</a>
-          </div>
         </form>
       </div>
     </div>
   )
 }
 
-export default Register
+export default Login 

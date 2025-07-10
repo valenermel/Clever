@@ -1,13 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Search, Menu } from "lucide-react"
 import "./Home.css"
 import Sidebar from "../components/Sidebar"
 import Post from "../components/Post"
 import RightMenu from "../components/RightMenu"
-
-
+import { userRequest, removeToken, logoutRequest } from "../api/auth"
+import { useNavigate } from "react-router-dom"
 
 
 // Datos de ejemplo
@@ -40,9 +40,26 @@ const posts = [
 
 function Home() {
   const [showRightMenu, setShowRightMenu] = useState(false)
+  const [user, setUser] = useState(null)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    userRequest()
+      .then(res => setUser(res.data))
+      .catch(() => {
+        removeToken()
+        navigate("/")
+      })
+  }, [navigate])
 
   const toggleRightMenu = () => {
     setShowRightMenu(!showRightMenu)
+  }
+
+  const handleLogout = async () => {
+    await logoutRequest()
+    removeToken()
+    navigate("/")
   }
 
   return (
@@ -53,6 +70,7 @@ function Home() {
           <img className="logo-icon" src="/logo.png" alt="" />
         </div>
         <div className="header-actions">
+          {user && <span className="user-header">{user.username}</span>}
           <button className="icon-button">
             <Search size={24} color="white" />
           </button>
@@ -71,7 +89,7 @@ function Home() {
           ))}
         </main>
 
-        <RightMenu isVisible={showRightMenu} />
+        <RightMenu isVisible={showRightMenu} user={user} onLogout={handleLogout} />
       </div>
     </div>
   )

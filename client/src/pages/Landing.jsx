@@ -3,9 +3,13 @@
 import { useState } from "react"
 import "./Landing.css"
 import Register from "../components/Register.jsx"
+import Login from "../components/Login.jsx"
+import { useNavigate } from "react-router-dom"
 
 function Landing() {
   const [showSignupModal, setShowSignupModal] = useState(false)
+  const [showLoginModal, setShowLoginModal] = useState(false)
+  const navigate = useNavigate()
 
   const handleOpenSignup = () => {
     setShowSignupModal(true)
@@ -15,9 +19,25 @@ function Landing() {
     setShowSignupModal(false)
   }
 
+  const handleOpenLogin = () => {
+    setShowLoginModal(true)
+  }
+
+  const handleCloseLogin = () => {
+    setShowLoginModal(false)
+  }
+
+  const handleLoginSuccess = () => {
+    navigate("/home")
+  }
+
+  const handleRegisterSuccess = () => {
+    navigate("/home")
+  }
+
   return (
     <div id="body">
-      <header>
+      <header id="header">
         <h1 id="title">Clever</h1>
         <div id="logo"></div>
       </header>
@@ -31,14 +51,15 @@ function Landing() {
             <button className="loginButton" id="loginButton" onClick={handleOpenSignup}>
               Crear cuenta
             </button>
-            <button className="loginButton" id="registerButton">
+            <button className="loginButton" id="registerButton" onClick={handleOpenLogin}>
               Iniciar sesión
             </button>
           </div>
         </div>
       </main>
 
-      {showSignupModal && <Register onClose={handleCloseSignup} />}
+      {showSignupModal && <Register onClose={handleCloseSignup} onRegisterSuccess={handleRegisterSuccess} />}
+      {showLoginModal && <Login onClose={handleCloseLogin} onLoginSuccess={handleLoginSuccess} />}
     </div>
   )
 }

@@ -172,6 +172,7 @@
   
   /* Posts */
   .post {
+    width: 50rem;
     background-color: var(--post-bg);
     border: 1px solid var(--border-color);
     padding: 1rem;
@@ -220,6 +221,25 @@
     align-items: center;
     justify-content: center;
     color: #555;
+  }
+  
+  .profile-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 1.5rem;
+    margin: 1rem;
+    color: #333;
+  }
+  .profile-card h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #4a90e2;
+    font-size: 1.2rem;
+  }
+  .profile-row {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
   }
   
   
