@@ -17,6 +17,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+        <Route path="/profile/:id" element={<PrivateRoute><Profile /></PrivateRoute>} />
       </Routes>
     </>
   )

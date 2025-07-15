@@ -82,3 +82,29 @@ export const profile = async (req, res, next) => {
         next(error)
     }
 }
+
+export const getUserById = async (req, res, next) => {
+    try {
+        const userFound = await User.findById(req.params.id)
+        if (!userFound) throw new appError("User not found", 404)
+        const userObject = userFound.toObject()
+        return res.json({
+            id: userObject._id,
+            username: userObject.username,
+            email: userObject.email,
+            createdAt: userObject.createdAt,
+            updatedAt: userObject.updatedAt,
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getAllUsers = async (req, res, next) => {
+    try {
+        const users = await User.find({}, 'username _id')
+        res.json(users)
+    } catch (error) {
+        next(error)
+    }
+}

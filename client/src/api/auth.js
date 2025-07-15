@@ -36,3 +36,10 @@ export const removeToken = () => {
 export const isAuthenticated = () => {
   return !!getToken()
 }
+
+// Funciones para posts
+export const getPostsRequest = () => axiosInstance.get("/api/posts")
+export const createPostRequest = (post) => axiosInstance.post("/api/posts", post)
+export const deletePostRequest = (id) => axiosInstance.delete(`/api/posts/${id}`)
+export const votePostRequest = (id, type) => axiosInstance.post(`/api/posts/${id}/vote`, { type })
+export const getAllUsersRequest = () => axiosInstance.get("/api/users")

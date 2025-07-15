@@ -1,18 +1,62 @@
 import { useEffect, useState } from "react"
-import { userRequest } from "../api/auth"
+import { userRequest, getPostsRequest } from "../api/auth"
 import "./Profile.css"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import Post from "../components/Post"
 
 function Profile() {
   const [user, setUser] = useState(null)
   const [tab, setTab] = useState("posts")
+  const [posts, setPosts] = useState([])
   const navigate = useNavigate()
+  const { id } = useParams()
+  const [authUser, setAuthUser] = useState(null)
 
   useEffect(() => {
-    userRequest().then(res => setUser(res.data)).catch(() => navigate("/"))
-  }, [navigate])
+    const fetchUser = async () => {
+      try {
+        let userData
+        if (id) {
+          // Obtener perfil de otro usuario
+          const res = await fetch(`http://localhost:4000/api/users/${id}`, { credentials: "include" })
+          userData = await res.json()
+        } else {
+          // Perfil propio
+          const res = await userRequest()
+          userData = res.data
+        }
+        setUser(userData)
+      } catch {
+        navigate("/")
+      }
+    }
+    fetchUser()
+  }, [id, navigate])
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await getPostsRequest()
+        if (id) {
+          setPosts(res.data.filter(post => post.user?._id === id))
+        } else if (user) {
+          setPosts(res.data.filter(post => post.user?._id === user.id || post.user?._id === user._id))
+        }
+      } catch {
+        setPosts([])
+      }
+    }
+    fetchPosts()
+  }, [id, user])
+
+  useEffect(() => {
+    userRequest().then(res => setAuthUser(res.data)).catch(() => setAuthUser(null))
+  }, [])
 
   if (!user) return <div className="profile-loading">Cargando...</div>
+
+  const diff = posts.reduce((acc, p) => acc + (p.votos_positivos || 0), 0) - posts.reduce((acc, p) => acc + (p.votos_negativos || 0), 0)
+  const diffColor = diff < 0 ? 'red' : 'green'
 
   return (
     <div className="profile-page">
@@ -34,11 +78,11 @@ function Profile() {
           </div>
           <div className="profile-stats">
             <div className="profile-stat">
-              <span className="profile-stat-value" style={{color: '#4caf50'}}>15k</span>
+              <span className="profile-stat-value" style={{color: diffColor}}>{diff}</span>
               <span className="profile-stat-label">Votos de posts</span>
             </div>
             <div className="profile-stat">
-              <span className="profile-stat-value">75</span>
+              <span className="profile-stat-value">{posts.length}</span>
               <span className="profile-stat-label">Posts totales</span>
             </div>
           </div>
@@ -51,15 +95,7 @@ function Profile() {
       </header>
       <main className="profile-content">
         {tab === "posts" && (
-          <div className="profile-post">
-            <div className="profile-post-header">
-              <img className="profile-post-avatar" src="/avatar1.png" alt="avatar" />
-              <span className="profile-post-username">@{user.username?.toLowerCase().replace(/ /g, "")}</span>
-            </div>
-            <div className="profile-post-title">Post</div>
-            <div className="profile-post-desc">Descripción del post</div>
-            <div className="profile-post-image">(imagen)</div>
-          </div>
+          posts.length > 0 ? posts.map(post => <Post key={post._id} post={post} currentUser={authUser && (!id || authUser.id === id || authUser._id === id) ? authUser : null} onPostDeleted={(id) => setPosts(posts.filter(p => p._id !== id))} />) : <div className="profile-placeholder">No hay posts aún.</div>
         )}
         {tab === "respuestas" && <div className="profile-placeholder">No hay respuestas aún.</div>}
         {tab === "comunidades" && <div className="profile-placeholder">No hay comunidades aún.</div>}

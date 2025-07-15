@@ -21,6 +21,11 @@ const postSchema = new mongoose.Schema(
             default: 0
         },
 
+        votedBy: [{
+          user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+          type: { type: String, enum: ['up', 'down'] }
+        }],
+
         user:{ //esto es para guardar de que usuario es esa tarea
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
