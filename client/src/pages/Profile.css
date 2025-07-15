@@ -5,31 +5,31 @@
 .profile-header {
   background: #fff;
   border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 2rem;
+  padding-bottom: 0;
 }
 .profile-navbar {
   display: flex;
   align-items: center;
-  background: #7e80ff;
+  background: linear-gradient(90deg, #7e80ff 80%, #6a6cff 100%);
   color: #fff;
   padding: 0.5rem 2rem;
   gap: 1rem;
+  justify-content: space-between;
 }
 .profile-logo {
   font-size: 2rem;
   font-weight: bold;
   margin-right: 0.5rem;
+  letter-spacing: 1px;
 }
 .profile-logo-icon {
-  width: 40px;
-  height: 40px;
-  background: #fff;
-  border-radius: 50%;
-  margin-right: auto;
+  width: 36px;
+
 }
 .profile-search-menu {
   display: flex;
   gap: 1rem;
+  margin-left: auto;
 }
 .profile-search-btn, .profile-menu-btn {
   background: none;
@@ -40,86 +40,111 @@
 }
 .profile-banner {
   background: #cfd8dc;
-  height: 100px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
   color: #888;
+  position: relative;
 }
 .profile-main-info {
   display: flex;
   align-items: center;
   gap: 2rem;
-  margin-top: -50px;
+  margin-top: -60px;
   padding: 0 2rem;
+  position: relative;
+  z-index: 2;
 }
 .profile-avatar {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   border: 6px solid #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   background: #eee;
+  object-fit: cover;
+  margin-right: 1.5rem;
 }
 .profile-user-info {
   flex: 1;
+  min-width: 0;
 }
 .profile-user-info h2 {
-  font-size: 2.2rem;
+  font-size: 2.3rem;
   margin: 0;
+  font-weight: 700;
+  color: #444;
 }
 .profile-username {
   color: #888;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   margin-top: 0.2rem;
 }
 .profile-stats {
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: center;
+  background: #f5f6fa;
+  border-radius: 12px;
+  padding: 1.2rem 2.2rem;
+  margin-left: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 .profile-stat {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 80px;
 }
 .profile-stat-value {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.profile-stat-value::before {
+  content: '';
 }
 .profile-stat-label {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #888;
+  margin-top: 0.1rem;
 }
 .profile-tabs {
   display: flex;
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: 2.5rem;
+  margin-top: 2.2rem;
   padding: 0 2rem;
+  justify-content: flex-start;
 }
 .profile-tabs button {
   background: none;
   border: none;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: #555;
   padding-bottom: 0.3rem;
-  border-bottom: 2px solid transparent;
+  border-bottom: 2.5px solid transparent;
   cursor: pointer;
-  transition: border 0.2s;
+  transition: border 0.2s, color 0.2s;
+  font-weight: 500;
 }
 .profile-tabs button.active {
   color: #7e80ff;
-  border-bottom: 2px solid #7e80ff;
+  border-bottom: 2.5px solid #7e80ff;
 }
 .profile-content {
-  padding: 2rem;
+  padding: 2.5rem 2rem 2rem 2rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 .profile-post {
   background: #fff;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  padding: 1.5rem;
+  padding: 1.7rem 1.5rem 1.2rem 1.5rem;
   margin-bottom: 1.5rem;
 }
 .profile-post-header {
@@ -129,23 +154,26 @@
   margin-bottom: 0.5rem;
 }
 .profile-post-avatar {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: #eee;
 }
 .profile-post-username {
   color: #7e80ff;
   font-weight: 500;
+  font-size: 1.08rem;
 }
 .profile-post-title {
-  font-size: 1.2rem;
+  font-size: 1.22rem;
   font-weight: bold;
   margin-bottom: 0.3rem;
+  color: #222;
 }
 .profile-post-desc {
   color: #555;
   margin-bottom: 0.5rem;
+  font-size: 1.05rem;
 }
 .profile-post-image {
   background: #cfd8dc;
@@ -154,6 +182,8 @@
   align-items: center;
   justify-content: center;
   color: #888;
+  border-radius: 8px;
+  margin-top: 0.5rem;
 }
 .profile-placeholder {
   color: #888;

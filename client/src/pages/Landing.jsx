@@ -39,10 +39,10 @@ function Landing() {
     <div id="body">
       <header id="header">
         <h1 id="title">Clever</h1>
-        <div id="logo"></div>
+        <img id="logo" src="/logo.png"/>
       </header>
       <main>
-        <div id="computerImg"></div>
+        <img id="computerImg" src="/dispositivos.jpg"/>
         <div id="sloganLoginContainer">
           <h2 id="slogan">
             Organiza, comunica, aprende, <br /> Todo en un solo lugar.
@@ -58,8 +58,8 @@ function Landing() {
         </div>
       </main>
 
-      {showSignupModal && <Register onClose={handleCloseSignup} onRegisterSuccess={handleRegisterSuccess} />}
-      {showLoginModal && <Login onClose={handleCloseLogin} onLoginSuccess={handleLoginSuccess} />}
+      {showSignupModal && <Register onClose={handleCloseSignup} onRegisterSuccess={handleRegisterSuccess} onOpenLogin={() => { setShowSignupModal(false); setShowLoginModal(true); }} />}
+      {showLoginModal && <Login onClose={handleCloseLogin} onLoginSuccess={handleLoginSuccess} onOpenRegister={() => { setShowLoginModal(false); setShowSignupModal(true); }} />}
     </div>
   )
 }

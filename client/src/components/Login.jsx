@@ -2,7 +2,7 @@ import { useState } from "react"
 import "../pages/Landing.css"
 import { loginRequest, isAuthenticated } from "../api/auth"
 
-function Login({ onClose, onLoginSuccess }) {
+function Login({ onClose, onLoginSuccess, onOpenRegister }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
@@ -75,6 +75,9 @@ function Login({ onClose, onLoginSuccess }) {
           <button className="create-button" type="submit" disabled={loading}>
             {loading ? "Ingresando..." : "Ingresar"}
           </button>
+          <div className="login-link">
+            ¿No tienes una cuenta? <a href="#" onClick={e => { e.preventDefault(); if (typeof onOpenRegister === 'function') onOpenRegister(); }}>Regístrate</a>
+          </div>
         </form>
       </div>
     </div>

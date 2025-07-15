@@ -2,7 +2,7 @@ import { useState } from "react"
 import "../pages/Landing.css"
 import { registerRequest, setToken } from "../api/auth"
 
-function Register({ onClose, onRegisterSuccess }) {
+function Register({ onClose, onRegisterSuccess, onOpenLogin }) {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -86,7 +86,7 @@ function Register({ onClose, onRegisterSuccess }) {
                 required
               />
             </div>
-            <div className="example-text">Tu contraseña debe tener al menos 8 caracteres</div>
+            <div className="example-text">Tu contraseña debe tener al menos 6 caracteres</div>
           </div>
 
           {/* El campo de fecha de nacimiento es solo visual, no se envía al backend */}
@@ -100,7 +100,7 @@ function Register({ onClose, onRegisterSuccess }) {
           </button>
 
           <div className="login-link">
-            ¿Ya tienes una cuenta? <a href="#" onClick={onClose}>Iniciar Sesión</a>
+            ¿Ya tienes una cuenta? <a href="#" onClick={e => { e.preventDefault(); if (typeof onOpenLogin === 'function') onOpenLogin(); }}>Iniciar Sesión</a>
           </div>
         </form>
       </div>

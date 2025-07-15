@@ -14,9 +14,7 @@
   }
   
   #logo {
-    padding: 1rem;
-    background-color: white;
-    border-radius: 50%;
+    width: 50px;
   }
   
   main {
@@ -28,8 +26,7 @@
   #computerImg {
     background-color: gray;
     margin: 2rem;
-    height: 20rem;
-    width: 35%;
+
     
   }
   
