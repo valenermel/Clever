@@ -10,33 +10,7 @@ import { userRequest, removeToken, logoutRequest, getPostsRequest, createPostReq
 import { useNavigate } from "react-router-dom"
 
 
-// Datos de ejemplo
-const users = [
-  { id: 1, name: "Escuela Técnica 36", initial: "", isSchool: true },
-  { id: 2, name: "Enzo Stella", initial: "E" },
-  { id: 3, name: "Alan Uzal", initial: "A" },
-  { id: 4, name: "Alejandra Masgoret", initial: "A" },
-  { id: 5, name: "Marcelo Ortiz Pla", initial: "M" },
-  { id: 6, name: "Mercedes Gutierrez", initial: "M" },
-]
 
-const posts = [
-  {
-    id: 1,
-    username: "@username1",
-    title: "Post",
-    description: "Descripción del post",
-    avatar: "/avatar1.png",
-  },
-  {
-    id: 2,
-    username: "@matiasjs",
-    title: "Post",
-    description: "Descripción del post",
-    avatar: "/avatar2.png",
-    image: "/image.png",
-  },
-]
 
 function Home() {
   const [showRightMenu, setShowRightMenu] = useState(false)
@@ -79,7 +53,7 @@ function Home() {
       setNewPost({ title: "", description: "" })
       fetchPosts()
     } catch (err) {
-      // Manejar error
+      alert(err)
     }
   }
 
@@ -140,7 +114,6 @@ function Home() {
                 onChange={e => setNewPost({ ...newPost, description: e.target.value })}
                 required
                 rows={3}
-                maxLength={300}
                 style={{marginBottom:'0.7rem'}}
               />
               <div style={{display:'flex',justifyContent:'flex-end'}}>

@@ -8,7 +8,7 @@ export const register = async (req, res, next) => {
     try {
 
         const emailAlreadyExists = await User.findOne({email})
-        if(emailAlreadyExists) throw new appError("Email already exists", 400)
+        if(emailAlreadyExists) throw new appError("El email ya existe", 400)
 
         const passwordHashed = await bcrypt.hash(password, 10)
         const newUser = new User({

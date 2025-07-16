@@ -34,6 +34,7 @@ function Landing() {
   const handleRegisterSuccess = () => {
     navigate("/home")
   }
+    
 
   return (
     <div id="body">
@@ -48,10 +49,10 @@ function Landing() {
             Organiza, comunica, aprende, <br /> Todo en un solo lugar.
           </h2>
           <div id="loginRegisterContainer">
-            <button className="loginButton" id="loginButton" onClick={handleOpenSignup}>
+            <button className="loginButton zoom" id="loginButton" onClick={handleOpenSignup}>
               Crear cuenta
             </button>
-            <button className="loginButton" id="registerButton" onClick={handleOpenLogin}>
+            <button className="loginButton zoom" id="registerButton" onClick={handleOpenLogin}>
               Iniciar sesión
             </button>
           </div>

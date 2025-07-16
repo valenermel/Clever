@@ -52,7 +52,6 @@ function Login({ onClose, onLoginSuccess, onOpenRegister }) {
                 required
               />
             </div>
-            <div className="example-text">Ej. juanperez@ejemplo.com</div>
           </div>
 
           <div className="form-group">
@@ -67,7 +66,6 @@ function Login({ onClose, onLoginSuccess, onOpenRegister }) {
                 required
               />
             </div>
-            <div className="example-text">Tu contraseña debe tener al menos 8 caracteres</div>
           </div>
 
           {error && <div className="example-text" style={{ color: 'red' }}>{error}</div>}

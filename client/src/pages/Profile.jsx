@@ -57,17 +57,18 @@ function Profile() {
 
   const diff = posts.reduce((acc, p) => acc + (p.votos_positivos || 0), 0) - posts.reduce((acc, p) => acc + (p.votos_negativos || 0), 0)
   const diffColor = diff < 0 ? 'red' : 'green'
+  const goToHome = () => {
+    navigate("/home")
+  }
+
 
   return (
     <div className="profile-page">
       <header className="profile-header">
         <div className="profile-navbar">
-          <h1 className="profile-logo">Clever</h1>
-          <img className="profile-logo-icon" src="/logo.png" alt="logo" />
-          <div className="profile-search-menu">
-            <button className="profile-search-btn">🔍</button>
-            <button className="profile-menu-btn">☰</button>
-          </div>
+          <h1 className="profile-logo" onClick={goToHome}>Clever</h1>
+          <img className="profile-logo-icon" src="/logo.png" alt="logo" onClick={goToHome} />
+
         </div>
         <div className="profile-banner">(banner)</div>
         <div className="profile-main-info">
@@ -79,7 +80,7 @@ function Profile() {
           <div className="profile-stats">
             <div className="profile-stat">
               <span className="profile-stat-value" style={{color: diffColor}}>{diff}</span>
-              <span className="profile-stat-label">Votos de posts</span>
+              <span className="profile-stat-label">Puntaje</span>
             </div>
             <div className="profile-stat">
               <span className="profile-stat-value">{posts.length}</span>
